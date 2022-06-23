@@ -1,6 +1,7 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 
+import Feed from '../components/Feed'
 import Sidebar from '../components/Sidebar'
 
 const Home: NextPage = () => {
@@ -13,7 +14,7 @@ const Home: NextPage = () => {
 
 			<main className='min-h-screen flex max-w-[1500px] mx-auto'>
 				<Sidebar />
-				{/* Feed */}
+				<Feed />
 				{/* Widgets */}
 
 				{/* Modal */}
