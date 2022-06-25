@@ -78,7 +78,7 @@ function Modal() {
 						leaveFrom='opacity-100 translate-y-0 sm:scale-100'
 						leaveTo='opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95'
 					>
-						<div className='inline-block align-bottom bg-black rounded-2xl text-left  shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-xl sm:w-full'>
+						<div className='relative inline-block align-bottom bg-black rounded-2xl text-left  shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-xl sm:w-full'>
 							<div className='flex items-center px-1.5 py-2 border-b border-gray-700'>
 								<div
 									className='hoverAnimation w-9 h-9 flex items-center justify-center xl:px-0'
@@ -129,7 +129,7 @@ function Modal() {
 												rows={2}
 												className='bg-transparent outline-none text-[#d9d9d9] text-lg placeholder-gray-500 tracking-wide w-full min-h-[80px]'
 											/>
-											<div className='relative flex items-center justify-between pt-2.5'>
+											<div className='flex items-center justify-between pt-2.5'>
 												<EmojiPicker
 													showEmojis={showEmojis}
 													setShowEmojis={setShowEmojis}

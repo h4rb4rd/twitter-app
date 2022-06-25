@@ -34,6 +34,7 @@ const EmojiPicker = ({
 	setInputValue,
 }: EmojiPickerProps) => {
 	const pickerRef = useRef(null)
+	const iconRef = useRef(null)
 
 	const onEmojiClick = (event: MouseEvent, data: IEmojiData) => {
 		setShowEmojis(false)
@@ -44,11 +45,15 @@ const EmojiPicker = ({
 		setShowEmojis(false)
 	}
 
-	useClickOutside(pickerRef, closeEmojiBar)
+	useClickOutside(pickerRef, iconRef, closeEmojiBar)
 
 	return (
 		<>
-			<div className='icon relative' onClick={() => setShowEmojis(!showEmojis)}>
+			<div
+				className='icon relative'
+				onClick={() => setShowEmojis(!showEmojis)}
+				ref={iconRef}
+			>
 				<EmojiHappyIcon className='text-[#1d9bf0] h-[22px]' />
 			</div>
 
