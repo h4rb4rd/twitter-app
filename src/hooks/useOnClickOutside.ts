@@ -8,7 +8,7 @@ export const useClickOutside = (
 		const listener = (event: MouseEvent | TouchEvent) => {
 			if (
 				event.target instanceof HTMLElement &&
-				(!ref.current || ref.current.contains(event.target))
+				(!ref?.current || ref?.current?.contains(event.target))
 			) {
 				return
 			}

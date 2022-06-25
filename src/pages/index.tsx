@@ -1,5 +1,5 @@
-import type { GetServerSideProps, NextPage } from 'next'
 import Head from 'next/head'
+import type { GetServerSideProps } from 'next'
 import {
 	ClientSafeProvider,
 	getProviders,
@@ -8,10 +8,13 @@ import {
 	useSession,
 } from 'next-auth/react'
 
-import Feed from '../components/Feed'
-import Sidebar from '../components/Sidebar'
-import Login from '../components/Login'
 import { BuiltInProviderType } from 'next-auth/providers'
+import Feed from '../components/Feed'
+import Login from '../components/Login'
+import Modal from '../components/Modal'
+import { modalState } from '../atoms/modalAtom'
+import Sidebar from '../components/Sidebar'
+import { useRecoilState } from 'recoil'
 
 interface HomeProps {
 	providers: Record<
@@ -21,6 +24,7 @@ interface HomeProps {
 }
 const Home = ({ providers }: HomeProps) => {
 	const { data: session } = useSession()
+	const [isOpen, setIsOpen] = useRecoilState(modalState)
 
 	if (!session) return <Login providers={providers} />
 
@@ -36,7 +40,7 @@ const Home = ({ providers }: HomeProps) => {
 				<Feed />
 				{/* Widgets */}
 
-				{/* Modal */}
+				{isOpen && <Modal />}
 			</main>
 		</>
 	)

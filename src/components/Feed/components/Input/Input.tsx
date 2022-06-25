@@ -13,8 +13,6 @@ const Input = () => {
 	const [showEmojis, setShowEmojis] = useState(false)
 	const filePickerRef = useRef<null | HTMLInputElement>(null)
 
-	const userImg = session?.user?.image || ''
-
 	const addImageToPost = (e: ChangeEvent<HTMLInputElement>) => {
 		const reader = new FileReader()
 
@@ -39,7 +37,7 @@ const Input = () => {
 			}`}
 		>
 			<img
-				src={userImg}
+				src={session?.user?.image || ''}
 				alt=''
 				className='h-11 w-11 rounded-full cursor-pointer'
 				onClick={handleSighOut}
