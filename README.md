@@ -8,5 +8,6 @@ This application is a clone of twitter.
 - Tailwindcss
 - Recoil
 - FIREBASE V9 SDK
+- NextAuth
 
 ## Deploy

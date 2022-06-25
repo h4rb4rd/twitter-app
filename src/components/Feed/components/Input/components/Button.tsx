@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction } from 'react'
 import { getDownloadURL, ref, uploadString } from '@firebase/storage'
+import { useSession } from 'next-auth/react'
 import {
 	addDoc,
 	collection,
@@ -29,11 +30,17 @@ const Button = ({
 	setSelectedFile,
 	setShowEmojis,
 }: ButtonProps) => {
+	const { data: session } = useSession()
+
 	const sendPost = async () => {
 		if (loading) return
 		setLoading(true)
 
 		const docRef = await addDoc(collection(db, 'posts'), {
+			id: session?.user.uid,
+			username: session?.user.name,
+			userImg: session?.user.image,
+			tag: session?.user.tag,
 			text: inputValue,
 			timestamp: serverTimestamp(),
 		})

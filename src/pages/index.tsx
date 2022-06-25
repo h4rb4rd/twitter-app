@@ -1,10 +1,29 @@
-import type { NextPage } from 'next'
+import type { GetServerSideProps, NextPage } from 'next'
 import Head from 'next/head'
+import {
+	ClientSafeProvider,
+	getProviders,
+	getSession,
+	LiteralUnion,
+	useSession,
+} from 'next-auth/react'
 
 import Feed from '../components/Feed'
 import Sidebar from '../components/Sidebar'
+import Login from '../components/Login'
+import { BuiltInProviderType } from 'next-auth/providers'
 
-const Home: NextPage = () => {
+interface HomeProps {
+	providers: Record<
+		LiteralUnion<BuiltInProviderType, string>,
+		ClientSafeProvider
+	> | null
+}
+const Home = ({ providers }: HomeProps) => {
+	const { data: session } = useSession()
+
+	if (!session) return <Login providers={providers} />
+
 	return (
 		<>
 			<Head>
@@ -21,6 +40,18 @@ const Home: NextPage = () => {
 			</main>
 		</>
 	)
+}
+
+export const getServerSideProps: GetServerSideProps = async context => {
+	const providers = await getProviders()
+	const session = await getSession(context)
+
+	return {
+		props: {
+			providers,
+			session,
+		},
+	}
 }
 
 export default Home

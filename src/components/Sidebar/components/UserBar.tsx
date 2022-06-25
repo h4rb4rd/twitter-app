@@ -1,19 +1,24 @@
 import { DotsHorizontalIcon } from '@heroicons/react/outline'
+import { signOut } from 'next-auth/react'
+import { useSession } from 'next-auth/react'
 
 const UserBar = () => {
+	const { data: session } = useSession()
+	const userImg = session?.user.image || ''
+
+	const handleSighOut = () => {
+		signOut()
+	}
+
 	return (
 		<div
 			className='text-[#d9d9d9] flex items-center justify-center mt-auto hoverAnimation xl:ml-auto xl:-mr-5'
-			onClick={() => console.log('signOut')}
+			onClick={handleSighOut}
 		>
-			<img
-				src='https://lh3.googleusercontent.com/ogw/ADea4I6He6BMbmqmLPhRRBOm6zUel9Bl6vfa0Y2P0AJm=s32-c-mo'
-				alt=''
-				className='h-10 w-10 rounded-full xl:mr-2.5'
-			/>
+			<img src={userImg} alt='' className='h-10 w-10 rounded-full xl:mr-2.5' />
 			<div className='hidden xl:inline leading-5'>
-				<h4 className='font-bold'>User</h4>
-				<p className='text-[#6e767d]'>@usertag</p>
+				<h4 className='font-bold'>{session?.user.name}</h4>
+				<p className='text-[#6e767d]'>{session?.user.tag}</p>
 			</div>
 			<DotsHorizontalIcon className='h-5 hidden xl:inline ml-10' />
 		</div>
