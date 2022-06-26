@@ -1,3 +1,11 @@
+import { useEffect, useState } from 'react'
+import { ArrowLeftIcon } from '@heroicons/react/solid'
+import { BuiltInProviderType } from 'next-auth/providers'
+import { GetServerSideProps } from 'next'
+import Head from 'next/head'
+import { useRecoilState } from 'recoil'
+import { useRouter } from 'next/router'
+
 import {
 	collection,
 	doc,
@@ -14,29 +22,31 @@ import {
 	LiteralUnion,
 	useSession,
 } from 'next-auth/react'
-import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
-import { useRecoilState } from 'recoil'
+
+import Comment from '../components/Comment'
+import { db } from '../../firebase'
+import Login from '../components/Login'
 import { modalState } from '../atoms/modalAtom'
 import Modal from '../components/Modal'
-import Sidebar from '../components/Sidebar'
-
 import Post from '../components/Post'
-import { db } from '../../firebase'
-import { ArrowLeftIcon } from '@heroicons/react/solid'
-import Comment from '../components/Comment'
-import Head from 'next/head'
-import { GetServerSideProps } from 'next'
-import { BuiltInProviderType } from 'next-auth/providers'
-import Login from '../components/Login'
+import Sidebar from '../components/Sidebar'
+import Widgets from '../components/Widgets'
+import { IFollowResults, ITrendingResults } from '../types/next-auth'
 
 interface PostPageProps {
 	providers: Record<
 		LiteralUnion<BuiltInProviderType, string>,
 		ClientSafeProvider
 	> | null
+
+	trendingResults: ITrendingResults[]
+	followResults: IFollowResults[]
 }
-function PostPage({ providers }: PostPageProps) {
+const PostPage = ({
+	providers,
+	trendingResults,
+	followResults,
+}: PostPageProps) => {
 	const { data: session } = useSession()
 	const [isOpen, setIsOpen] = useRecoilState(modalState)
 	const [post, setPost] = useState<DocumentData | undefined>([])
@@ -106,7 +116,10 @@ function PostPage({ providers }: PostPageProps) {
 						</div>
 					)}
 				</div>
-				{/* WIDGETS */}
+				<Widgets
+					trendingResults={trendingResults}
+					followResults={followResults}
+				/>
 
 				{isOpen && <Modal />}
 			</main>
@@ -120,10 +133,19 @@ export const getServerSideProps: GetServerSideProps = async context => {
 	const providers = await getProviders()
 	const session = await getSession(context)
 
+	const trendingResults = await fetch('https://jsonkeeper.com/b/NKEV').then(
+		res => res.json()
+	)
+	const followResults = await fetch('https://jsonkeeper.com/b/WWMJ').then(res =>
+		res.json()
+	)
+
 	return {
 		props: {
 			providers,
 			session,
+			trendingResults,
+			followResults,
 		},
 	}
 }
