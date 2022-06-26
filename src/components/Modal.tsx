@@ -17,7 +17,7 @@ import {
 import { db } from '../../firebase'
 import { modalState } from '../atoms/modalAtom'
 import { postIdState } from '../atoms/postAtom'
-import EmojiPicker from './Feed/components/Input/components/EmojiPicker'
+import EmojiPicker from './EmojiPicker'
 
 function Modal() {
 	const { data: session } = useSession()

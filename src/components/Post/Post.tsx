@@ -1,17 +1,23 @@
 import { DocumentData } from 'firebase/firestore'
+import { useRouter } from 'next/router'
 
 import Icons from './components/Icons'
 import PostBody from './components/PostBody'
 
 interface PostProps {
 	id: string
-	post: DocumentData
+	post: DocumentData | undefined
 	postPage?: string
 }
 
 const Post = ({ id, post, postPage }: PostProps) => {
+	const router = useRouter()
+
 	return (
-		<div className='p-3 flex cursor-pointer border-b border-gray-700'>
+		<div
+			className='p-3 flex cursor-pointer border-b border-gray-700'
+			onClick={() => router.push(`/${id}`)}
+		>
 			{!postPage && (
 				<img
 					src={post?.userImg}

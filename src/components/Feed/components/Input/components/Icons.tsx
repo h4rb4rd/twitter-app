@@ -1,7 +1,7 @@
 import { ChangeEvent, Dispatch, MutableRefObject, SetStateAction } from 'react'
 import { PhotographIcon } from '@heroicons/react/outline'
 
-import EmojiPicker from './EmojiPicker'
+import EmojiPicker from '../../../../EmojiPicker'
 
 interface IconsProps {
 	showEmojis: boolean

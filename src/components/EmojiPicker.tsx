@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic'
 import { EmojiHappyIcon } from '@heroicons/react/outline'
 import { IEmojiData } from 'emoji-picker-react'
 
-import { useClickOutside } from '../../../../../hooks/useOnClickOutside'
+import { useClickOutside } from '../hooks/useOnClickOutside'
 
 const Picker = dynamic(() => import('emoji-picker-react'), {
 	ssr: false,

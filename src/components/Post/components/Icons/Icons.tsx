@@ -7,7 +7,7 @@ import Trash from './components/Trash'
 interface IconsProps {
 	id: string
 	postPage?: string
-	post: DocumentData
+	post: DocumentData | undefined
 }
 
 const Icons = ({ id, postPage, post }: IconsProps) => {

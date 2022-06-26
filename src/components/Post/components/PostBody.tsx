@@ -3,7 +3,7 @@ import { DotsHorizontalIcon } from '@heroicons/react/outline'
 import Moment from 'react-moment'
 
 interface PostBodyProps {
-	post: DocumentData
+	post: DocumentData | undefined
 	postPage?: string
 }
 

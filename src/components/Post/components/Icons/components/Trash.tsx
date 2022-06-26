@@ -7,7 +7,7 @@ import { db } from '../../../../../../firebase'
 
 interface TrashProps {
 	id: string
-	post: DocumentData
+	post: DocumentData | undefined
 }
 
 const Trash = ({ id, post }: TrashProps) => {
