@@ -29,7 +29,7 @@ const Trash = ({ id, componentId, type, postId }: TrashProps) => {
 
 	return (
 		<>
-			{session?.user.uid === componentId && (
+			{session?.user.uid === componentId ? (
 				<div
 					className='flex items-center space-x-1 group'
 					onClick={deleteComment}
@@ -38,6 +38,8 @@ const Trash = ({ id, componentId, type, postId }: TrashProps) => {
 						<TrashIcon className='h-5 group-hover:text-red-600' />
 					</div>
 				</div>
+			) : (
+				<span className='opacity-0 w-9'></span>
 			)}
 		</>
 	)

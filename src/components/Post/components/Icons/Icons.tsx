@@ -15,10 +15,10 @@ const Icons = ({ id, postPage, post }: IconsProps) => {
 		<div
 			className={`text-[#6e767d] flex justify-between w-10/12 ${
 				postPage && 'mx-auto'
-			}`}
+			} pl-2`}
 		>
-			<Comments id={id} />
 			<Likes id={id} type='posts' />
+			<Comments id={id} />
 			<Trash id={id} componentId={post?.id} type='posts' />
 		</div>
 	)
