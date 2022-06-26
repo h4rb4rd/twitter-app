@@ -45,3 +45,17 @@
 	background: #000 !important;
 	border: 1px solid #1d9bf0 !important;
 }
+
+.emoji-scroll-wrapper::-webkit-scrollbar {
+	width: 5px;
+}
+
+.emoji-scroll-wrapper::-webkit-scrollbar-track {
+	background-color: #1d9cf052;
+	border-radius: 20px;
+}
+
+.emoji-scroll-wrapper::-webkit-scrollbar-thumb {
+	box-shadow: inset 0 0 6px #1d9bf0;
+	border-radius: 20px;
+}
