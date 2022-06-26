@@ -111,6 +111,7 @@ const PostPage = ({
 									key={comment.id}
 									id={comment.id}
 									comment={comment.data()}
+									postId={typeof id === 'string' ? id : ''}
 								/>
 							))}
 						</div>

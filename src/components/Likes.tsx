@@ -16,20 +16,21 @@ import {
 	QueryDocumentSnapshot,
 } from '@firebase/firestore'
 
-import { db } from '../../../../../../firebase'
+import { db } from '../../firebase'
 
 interface LikesProps {
+	type: string
 	id: string
 }
 
-const Likes = ({ id }: LikesProps) => {
+const Likes = ({ id, type }: LikesProps) => {
 	const { data: session } = useSession()
 	const [liked, setLiked] = useState(false)
 	const [likes, setLikes] = useState<QueryDocumentSnapshot<DocumentData>[]>([])
 
 	useEffect(
 		() =>
-			onSnapshot(collection(db, 'posts', id, 'likes'), snapshot =>
+			onSnapshot(collection(db, type, id, 'likes'), snapshot =>
 				setLikes(snapshot.docs)
 			),
 		[db, id]
@@ -44,11 +45,11 @@ const Likes = ({ id }: LikesProps) => {
 	const likePost = async () => {
 		if (liked) {
 			if (session && session.user.uid) {
-				await deleteDoc(doc(db, 'posts', id, 'likes', session?.user.uid))
+				await deleteDoc(doc(db, type, id, 'likes', session?.user.uid))
 			}
 		} else {
 			if (session && session.user.uid) {
-				await setDoc(doc(db, 'posts', id, 'likes', session?.user.uid), {
+				await setDoc(doc(db, type, id, 'likes', session?.user.uid), {
 					username: session?.user.name,
 				})
 			}

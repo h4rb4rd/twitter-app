@@ -1,8 +1,8 @@
 import { DocumentData } from '@firebase/firestore'
 
 import Comments from './components/Comments'
-import Likes from './components/Likes'
-import Trash from './components/Trash'
+import Likes from '../../../Likes'
+import Trash from '../../../Trash'
 
 interface IconsProps {
 	id: string
@@ -18,8 +18,8 @@ const Icons = ({ id, postPage, post }: IconsProps) => {
 			}`}
 		>
 			<Comments id={id} />
-			<Likes id={id} />
-			<Trash id={id} post={post} />
+			<Likes id={id} type='posts' />
+			<Trash id={id} componentId={post?.id} type='posts' />
 		</div>
 	)
 }

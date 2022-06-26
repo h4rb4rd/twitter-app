@@ -1,12 +1,16 @@
 import { DocumentData } from 'firebase/firestore'
-import Moment from 'react-moment'
 import { DotsHorizontalIcon } from '@heroicons/react/outline'
+import Moment from 'react-moment'
+
+import Likes from './Likes'
+import Trash from './Trash'
 
 interface CommentProps {
 	id: string
 	comment: DocumentData
+	postId: string
 }
-const Comment = ({ comment }: CommentProps) => {
+const Comment = ({ id, comment, postId }: CommentProps) => {
 	return (
 		<div className='p-3 flex cursor-pointer border-b border-gray-700'>
 			<img
@@ -36,6 +40,16 @@ const Comment = ({ comment }: CommentProps) => {
 					<div className='icon group flex-shrink-0'>
 						<DotsHorizontalIcon className='h-5 text-[#6e767d] group-hover:text-[#1d9bf0]' />
 					</div>
+				</div>
+
+				<div className='text-[#6e767d] flex justify-between w-10/12'>
+					<Likes id={id} type='comments' />
+					<Trash
+						id={id}
+						componentId={comment?.id}
+						postId={postId}
+						type='comments'
+					/>
 				</div>
 			</div>
 		</div>

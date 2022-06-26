@@ -19,7 +19,7 @@ import { modalState } from '../atoms/modalAtom'
 import { postIdState } from '../atoms/postAtom'
 import EmojiPicker from './EmojiPicker'
 
-function Modal() {
+const Modal = () => {
 	const { data: session } = useSession()
 	const [isOpen, setIsOpen] = useRecoilState(modalState)
 	const [postId, setPostId] = useRecoilState(postIdState)
@@ -40,6 +40,7 @@ function Modal() {
 		e.preventDefault()
 
 		await addDoc(collection(db, 'posts', postId, 'comments'), {
+			id: session?.user.uid,
 			comment: comment,
 			username: session?.user.name,
 			tag: session?.user.tag,
