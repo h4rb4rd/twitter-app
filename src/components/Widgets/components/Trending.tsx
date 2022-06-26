@@ -1,7 +1,7 @@
 import { DotsHorizontalIcon } from '@heroicons/react/outline'
 import Image from 'next/image'
 
-import { ITrendingResults } from '../types/next-auth'
+import { ITrendingResults } from '../../../types/next-auth'
 
 interface TrendingProps {
 	result: ITrendingResults
