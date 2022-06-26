@@ -32,7 +32,7 @@ const Input = () => {
 
 	return (
 		<div
-			className={`border-b border-gray-700 p-3 flex space-x-3 overflow-y-scroll scrollbar-hide ${
+			className={`border-b border-gray-700 p-3 flex space-x-3 overflow-hidden scrollbar-hide ${
 				loading && 'opacity-60'
 			}`}
 		>
